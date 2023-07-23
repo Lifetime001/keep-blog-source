@@ -8,6 +8,10 @@
     "lint:style": "stylelint --fix ./source/css",
     "git:push": "git push --tag && git push -u origin dev",
     "git:add": "npm run format && npm run lint:style && git add ."
+    "build": "hexo g",
+    "clean": "hexo clean",
+    "deploy": "hexo d",
+    "server": "hexo s"
   },
   "repository": {
     "type": "git",
