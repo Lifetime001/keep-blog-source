@@ -1,17 +1,12 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Deploy Hexo Blog
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -22,33 +17,21 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v1
-        with:
-            ref: main
+      - uses: actions/checkout@v2
 
-      - name: Setup Node.js
+      - name: Setup Node.js environment
         uses: actions/setup-node@v1
         with:
-              node-version: '12'
+          node-version: '18'
 
-
-      - name: Setup Hexo
+      - name: Deploy Blog
         env: 
-                # HEXO_DEPLOY_PRI_XIAOXIN_WINDOW 这个就是配置hexo仓库secrets的name，一定要对应上
-                ACTION_DEPLOY_KEY: ${{ secrets.HEXO_DEPLOY_PRI }}
+          # HEXO_DEPLOY_PRI_XIAOXIN_WINDOW 这个就是配置hexo仓库secrets的name，一定要对应上
+          ACTION_DEPLOY_KEY: ${{ secrets.HEXO_DEPLOY_PRI }}
         run: |
-                    mkdir -p ~/.ssh/
-                    echo "$ACTION_DEPLOY_KEY"> ~/.ssh/id_rsa
-                    chmod 700 ~/.ssh
-                    chmod 600 ~/.ssh/id_rsa
-                    ssh-keyscan github.com >> ~/.ssh/known_hosts
-                    git config --global user.email maxlifetime@qq.com # 你的GitHub邮箱
-                    git config --global user.name czmaxmail# 你的GitHub名字
-                    npm install hexo-cli -g
-                    npm install
-      - name: Deploy
-        run: |
-            hexo clean
-            hexo deploy
+          git config --global user.email "maxlifetime@qq.com" # 你的GitHub邮箱
+          git config --global user.name "czmaxmail" # 你的GitHub名字
+          npm install 
+          npm run build
+          npm run deploy
 
