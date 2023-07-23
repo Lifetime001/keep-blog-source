@@ -8,10 +8,6 @@
     "lint:style": "stylelint --fix ./source/css",
     "git:push": "git push --tag && git push -u origin dev",
     "git:add": "npm run format && npm run lint:style && git add ."
-    "build": "hexo g",
-    "clean": "hexo clean",
-    "deploy": "hexo d",
-    "server": "hexo s"
   },
   "repository": {
     "type": "git",
@@ -37,5 +33,31 @@
     "stylelint": "^14.13.0",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-stylus": "^0.17.0"
+  }
+}
+{
+  "name": "hexo-site",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "hexo g",
+    "clean": "hexo clean",
+    "deploy": "hexo d",
+    "server": "hexo s"
+  },
+  "hexo": {
+    "version": "6.3.0"
+  },
+  "dependencies": {
+    "hexo": "^6.3.0",
+    "hexo-generator-archive": "^2.0.0",
+    "hexo-generator-category": "^2.0.0",
+    "hexo-generator-index": "^3.0.0",
+    "hexo-generator-tag": "^2.0.0",
+    "hexo-renderer-ejs": "^2.0.0",
+    "hexo-renderer-marked": "^6.0.0",
+    "hexo-renderer-stylus": "^3.0.0",
+    "hexo-server": "^3.0.0",
+    "hexo-theme-landscape": "^1.0.0"
   }
 }
